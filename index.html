@@ -78,9 +78,9 @@ async function send(){
   au(text);H.push({role:'user',content:text});st();
   const sys='You are Ivy, a friendly AI real estate assistant for '+AGENT+' at '+SITE+'. Help visitors with property questions, qualify leads by asking about budget, timeline, property type, and location. Offer to book a call or viewing when they seem ready. Keep replies conversational, 2 to 4 sentences. Never use em dashes. Do not mention Claude or Anthropic. You are Ivy.';
   try{
-    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':KEY,'anthropic-version':'2023-06-01','anthropic-dangerous-direct-browser-access':'true'},body:JSON.stringify({model:'claude-haiku-4-5-20251001',max_tokens:300,system:sys,messages:H})});
-    const data=await r.json();rt();
-    if(data.content&&data.content[0]&&data.content[0].text){const rep=data.content[0].text;H.push({role:'assistant',content:rep});ab(rep.replace(/\n/g,'<br>'))}
+    const r=await fetch('https://api.openai.com/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+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},body:JSON.stringify({model:'gpt-4o-mini',max_tokens:300,messages:[{role:'system',content:sys},...H]})});
+const data=await r.json();rt();
+if(data.choices&&data.choices[0]&&data.choices[0].message){const rep=data.choices[0].message.content;
     else{se(data.error?data.error.message:'Something went wrong. Please try again.')}
   }catch(e){rt();se('Preview mode — API key removed for safety.')}
   busy=false;document.getElementById('sb').disabled=false;document.getElementById('inp').focus();
