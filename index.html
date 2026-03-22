@@ -62,7 +62,7 @@
   <div class="pw">Powered by Ivy AI</div>
 </div>
 <script>
-const KEY="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",AGENT="Lacy Rushin",SITE="www.lacyrushin.com/";
+const KEY="",AGENT="Lacy Rushin",SITE="www.lacyrushin.com/";
 let H=[],busy=false;
 function ab(h){const m=document.getElementById('msgs'),d=document.createElement('div');d.className='msg bot';d.innerHTML='<div class="mav">Ivy</div><div class="bbl">'+h+'</div>';m.appendChild(d);m.scrollTop=m.scrollHeight}
 function au(t){const m=document.getElementById('msgs'),d=document.createElement('div');d.className='msg user';d.innerHTML='<div class="bbl">'+t+'</div>';m.appendChild(d);m.scrollTop=m.scrollHeight}
@@ -78,7 +78,7 @@ async function send(){
   au(text);H.push({role:'user',content:text});st();
   const sys='You are Ivy, a friendly AI real estate assistant for '+AGENT+' at '+SITE+'. Help visitors with property questions, qualify leads by asking about budget, timeline, property type, and location. Offer to book a call or viewing when they seem ready. Keep replies conversational, 2 to 4 sentences. Never use em dashes. Do not mention Claude or Anthropic. You are Ivy.';
   try{
-    const r=await fetch('https://api.openai.com/v1/chat/completions',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+KEY},body:JSON.stringify({model:'gpt-4o-mini',max_tokens:300,messages:[{role:'system',content:sys},...H]})});
+    const r=await fetch('https://lucky-union-7a4c.vishalchopdepatil.workers.dev/',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'gpt-4o-mini',max_tokens:300,messages:[{role:'system',content:sys},...H]})});
     const data=await r.json();rt();
     if(data.choices&&data.choices[0]&&data.choices[0].message){const rep=data.choices[0].message.content;H.push({role:'assistant',content:rep});ab(rep.replace(/\n/g,'<br>'))}
     else{se(data.error?data.error.message:'Something went wrong. Please try again.')}
